@@ -1,10 +1,8 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import pkg from '@prisma/client';
-const { PrismaClient } = pkg;
-const prisma = new PrismaClient();
+import { prisma } from '../models/prismaClient.js'; // create and export prisma client once
 
-import { createUser, findUserByEmail } from '../models/userModel.js'
+// import { createUser, findUserByEmail } from '../models/userModel.js'
 
 // User registeration api
 export async function register(req, res) {
@@ -27,7 +25,7 @@ export async function register(req, res) {
     //     }
     // });
     const user = await prisma.user.create({
-        data: { name, email, password: hashed },
+        data: { name, email, password: hashed, role: 'USER' },
     });
 
     res.status(201).json({ message: "User registered successfully", user });
@@ -54,4 +52,8 @@ export async function login(req, res) {
 
 export async function profile(req, res) {
     res.json({ message: "Profile", user: req.user });
+}
+
+export async function posts(req, res) {
+
 }

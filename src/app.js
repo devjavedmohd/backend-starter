@@ -12,7 +12,10 @@ app.use(express.json());
 
 // Routes
 import authRoutes from './routes/authRoutes.js';
+import postRoutes from './routes/postRoutes.js';
 app.use('/api/auth', authRoutes)
+app.use('/api/posts', postRoutes)
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`)

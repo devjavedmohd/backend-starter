@@ -15,11 +15,12 @@ const { PrismaClient } = pkg;
 const prisma = new PrismaClient();
 
 export async function createUser(data) {
-    return await prisma.user.create({data})
+    return await prisma.user.create({ data })
 }
 
 export async function findUserByEmail(email) {
     return await prisma.user.findUnique({
-        where: {email}
+        where: { email },
+        include: { posts: true }
     })
 }
